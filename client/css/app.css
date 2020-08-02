@@ -1,0 +1,16 @@
+html, body {
+margin: 0;
+padding: 12px;
+height: 100%;
+width: 100%;
+
+}
+text {
+font-family: arial;
+}
+.axis path,
+.axis line {
+fill: none;
+stroke: slategray;
+shape-rendering: crispEdges;
+}
