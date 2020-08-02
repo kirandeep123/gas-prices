@@ -1,5 +1,5 @@
 const createChartForEntity = (duration, filePath) => {
-  var parseDate = d3.timeParse("%Y-%m-%d");
+var parseDate = d3.timeParse("%Y-%m-%d");
   var margin = { left: 150, right: 20, top: 20, bottom: 50 };
   var width = 860 - margin.left - margin.right;
   var height = 400 - margin.top - margin.bottom;

@@ -1,0 +1,95 @@
+{
+    "name": "gas-prices",
+    "title": "Gas Prices",
+    "version": "0.1",
+    "author": "Kirandeep KAUR",
+    "licenses": [
+        {
+            "name": "GNU",
+            "path": "https://opensource.org/licenses/GPL-3.0",
+            "title": "GNU General Public License"
+        }
+    ],
+    "resources": [
+        {
+            "name": "daily_gas_prices",
+            "path": "data/csv/daily.csv",
+            "format": "csv",
+            "mediatype": "text/csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "Date",
+                        "description": "Henry Gas Daily Price",
+                        "type": "string"
+                    },
+                    {
+                        "name": "Price",
+                        "description": "Natural Gas's Price",
+                        "type": "string"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "weekly_gas_prices",
+            "path": "data/csv/weekly.csv",
+            "format": "csv",
+            "mediatype": "text/csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "Date",
+                        "description": "Henry Gas Weekly Price",
+                        "type": "string"
+                    },
+                    {
+                        "name": "Price",
+                        "description": "Natural Gas's Price",
+                        "type": "string"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "monthly_gas_prices",
+            "path": "data/csv/monthly.csv",
+            "format": "csv",
+            "mediatype": "text/csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "Date",
+                        "description": "Henry Gas Monthly Price",
+                        "type": "string"
+                    },
+                    {
+                        "name": "Price",
+                        "description": "Natural Gas's Price",
+                        "type": "string"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "annual_gas_prices",
+            "path": "data/csv/annually.csv",
+            "format": "csv",
+            "mediatype": "text/csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "Date",
+                        "description": "Henry Gas Annual Price",
+                        "type": "string"
+                    },
+                    {
+                        "name": "Price",
+                        "description": "Natural Gas's Price",
+                        "type": "string"
+                    }
+                ]
+            }
+        }
+    ]
+}
