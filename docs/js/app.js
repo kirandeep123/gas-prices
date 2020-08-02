@@ -93,9 +93,9 @@ var parseDate = d3.timeParse("%Y-%m-%d");
     });
 };
 var map = {
-  Daily: "../data/csv/daily.csv",
-  Weekly: "../data/csv/weekly.csv",
-  Monthly: "../data/csv/monthly.csv",
+  Daily: "https://raw.githubusercontent.com/kirandeep123/gas-prices/master/data/csv/daily.csv",
+  Weekly: "https://raw.githubusercontent.com/kirandeep123/gas-prices/master/data/csv/weekly.csv",
+  Monthly: "https://raw.githubusercontent.com/kirandeep123/gas-prices/master/data/csv/monthly.csv",
   Annual: "https://raw.githubusercontent.com/kirandeep123/gas-prices/master/data/csv/annually.csv"
 };
     for(let dur in map) {
