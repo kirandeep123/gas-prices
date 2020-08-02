@@ -26,7 +26,7 @@ def make_data_folder():
 
 
 '''
-get gas prices as per
+get gas prices as per different time frames 
 '''
 def gas_prices_time_frame():
     for duration in TIME_FRAME:
@@ -34,7 +34,7 @@ def gas_prices_time_frame():
 
 
 '''
-
+download the xls files for all time frames
 '''
 def download_file(name, url):
     response = requests.get(url)
@@ -44,7 +44,8 @@ def download_file(name, url):
 
 
 '''
-
+downloaded xls files are converted in csv files 
+and stored in data folder respectively
 '''
 def convert_xls_to_csv(duration):        
     data_xls = pandas.read_excel(XLS_FOLDER + '/' + duration + '.xls', 'Data 1', index_col=None).iloc[2:]
@@ -59,18 +60,12 @@ def convert_xls_to_csv(duration):
     data_xls[['Date', 'Price']].to_csv(CSV_FOLDER + '/' + duration + '.csv', index=False)
 
 
-'''
 
-'''
 def main():
     make_data_folder()
     for name, url in gas_prices_time_frame():
         download_file(name, url)
         convert_xls_to_csv(name)
     
-
-'''
-
-'''
 if __name__ == "__main__":
     main()

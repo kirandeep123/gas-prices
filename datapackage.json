@@ -2,7 +2,7 @@
     "name": "gas-prices",
     "title": "Gas Prices",
     "version": "0.1",
-    "author": "Kirandeep KAUR",
+    "author": "Kirandeep Kaur",
     "licenses": [
         {
             "name": "GNU",
@@ -20,7 +20,7 @@
                 "fields": [
                     {
                         "name": "Date",
-                        "description": "Henry Gas Daily Price",
+                        "description": "Gas Daily Price",
                         "type": "string"
                     },
                     {
@@ -40,7 +40,7 @@
                 "fields": [
                     {
                         "name": "Date",
-                        "description": "Henry Gas Weekly Price",
+                        "description": "Gas Weekly Price",
                         "type": "string"
                     },
                     {
@@ -60,7 +60,7 @@
                 "fields": [
                     {
                         "name": "Date",
-                        "description": "Henry Gas Monthly Price",
+                        "description": "Gas Monthly Price",
                         "type": "string"
                     },
                     {
@@ -80,7 +80,7 @@
                 "fields": [
                     {
                         "name": "Date",
-                        "description": "Henry Gas Annual Price",
+                        "description": "Gas Annual Price",
                         "type": "string"
                     },
                     {
