@@ -1,103 +1,91 @@
 const createChartForEntity = (duration, filePath) => {
-var parseDate = d3.timeParse("%Y-%m-%d");
-  var margin = { left: 150, right: 20, top: 20, bottom: 50 };
-  var width = 860 - margin.left - margin.right;
-  var height = 400 - margin.top - margin.bottom;
+  // set the dimensions and margins of the graph
+  var margin = { top: 50, right: 30, bottom: 30, left: 60 },
+    width = 460 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
 
-  var max = 0;
+  // append the svg object to the body of the page
+  var svg = d3
+    .select("body")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  var xNudge = 50;
-  var yNudge = 20;
-
-  var minDate = new Date();
-  var maxDate = new Date();
-
-  d3.csv(filePath)
-    .row(function(d) {
-      return {
-        date: parseDate(d.Date),
-        price: Number(d.Price.trim().slice(1))
-      };
-    })
-    .get(function(error, rows) {
-      max = d3.max(rows, function(d) {
-        return d.price;
-      });
-      minDate = d3.min(rows, function(d) {
-        return d.date;
-      });
-      maxDate = d3.max(rows, function(d) {
-        return d.date;
-      });
-
-      var y = d3
-        .scaleLinear()
-        .domain([0, max])
-        .range([height, 0]);
-
+  //Read the data
+  d3.csv(
+    filePath,
+    function(d) {
+      return { date: d3.timeParse("%Y-%m-%d")(d.Date), value: d.Price };
+    },
+    function(data) {
+      // Add X axis --> it is a date format
       var x = d3
         .scaleTime()
-        .domain([minDate, maxDate])
+        .domain(
+          d3.extent(data, function(d) {
+            return d.date;
+          })
+        )
         .range([0, width]);
-
-      var yAxis = d3.axisLeft(y);
-
-      var xAxis = d3.axisBottom(x);
-
-      var line = d3
-        .line()
-        .x(function(d) {
-          return x(d.date);
-        })
-        .y(function(d) {
-          return y(d.price);
-        })
-        .curve(d3.curveCardinal);
-
-      var svg = d3
-        .select("body")
-        .append("svg")
-        .attr("id", "svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom);
-      var chartGroup = svg
+      svg
         .append("g")
-        .attr("class", "chartGroup")
-        .attr("transform", "translate(" + xNudge + "," + yNudge + ")");
-
-      chartGroup
-        .append("path")
-        .attr("class", "line")
-        .attr("d", function(d) {
-          return line(rows);
-        });
-
-      chartGroup
-        .append("g")
-        .attr("class", "axis x")
         .attr("transform", "translate(0," + height + ")")
-        .call(xAxis);
-      chartGroup
-        .append("g")
-        .attr("class", "axis y")
-        .call(yAxis);
-      chartGroup
+        .call(d3.axisBottom(x));
+
+      // Add Y axis
+      var y = d3
+        .scaleLinear()
+        .domain([
+          0,
+          d3.max(data, function(d) {
+            return +d.value;
+          })
+        ])
+        .range([height, 0]);
+      svg.append("g").call(d3.axisLeft(y));
+
+      // Add the line
+      svg
+        .append("path")
+        .datum(data)
+        .attr("fill", "none")
+        .attr("stroke", "black")
+        .attr("stroke-width", 1.5)
+        .attr(
+          "d",
+          d3
+            .line()
+            .x(function(d) {
+              return x(d.date);
+            })
+            .y(function(d) {
+              return y(d.value);
+            })
+        );
+      svg
         .append("text")
         .style("font-size", "20px")
         .style("text-decoration", "underline")
         .style("font-weight", "700")
+        .attr("text-anchor", "right")
         .attr("x", width / 2)
-        .attr("y", 0 - margin.top / 322)
-        .text(duration + " Prices")
-        .attr("text-anchor", "right");
-    });
+        .attr("y", 0 - margin.top / 122)
+        .text(duration + "Prices");
+    }
+  );
 };
 var map = {
-  Daily: "https://raw.githubusercontent.com/kirandeep123/gas-prices/master/data/csv/daily.csv",
-  Weekly: "https://raw.githubusercontent.com/kirandeep123/gas-prices/master/data/csv/weekly.csv",
-  Monthly: "https://raw.githubusercontent.com/kirandeep123/gas-prices/master/data/csv/monthly.csv",
-  Annual: "https://raw.githubusercontent.com/kirandeep123/gas-prices/master/data/csv/annually.csv"
+  Daily:
+    "https://raw.githubusercontent.com/kirandeep123/gas-prices/master/data/csv/daily.csv",
+  Weekly:
+    "https://raw.githubusercontent.com/kirandeep123/gas-prices/master/data/csv/weekly.csv",
+  Monthly:
+    "https://raw.githubusercontent.com/kirandeep123/gas-prices/master/data/csv/monthly.csv",
+  Annual:
+    "https://raw.githubusercontent.com/kirandeep123/gas-prices/master/data/csv/annually.csv"
 };
-    for(let dur in map) {
-    createChartForEntity(dur, map[dur]);
-    }
+for(let duration in map) {
+  createChartForEntity(duration, map[duration]);
+}
