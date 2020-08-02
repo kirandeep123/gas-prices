@@ -96,7 +96,7 @@ var map = {
   Daily: "../data/csv/daily.csv",
   Weekly: "../data/csv/weekly.csv",
   Monthly: "../data/csv/monthly.csv",
-  Annual: "../data/csv/annual.csv"
+  Annual: "https://raw.githubusercontent.com/kirandeep123/gas-prices/master/data/csv/annually.csv"
 };
     for(let dur in map) {
     createChartForEntity(dur, map[dur]);
